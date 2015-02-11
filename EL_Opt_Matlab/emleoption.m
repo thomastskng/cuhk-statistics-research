@@ -18,7 +18,8 @@ options = optimset('Display','iter');%,'TolX',1e-4, 'TolFun', 1e-8);
 
 
 for k=1:noofiter,
-
+  
+    % generate 1001 logS geometric brownian motion samples
   for j=1:nsims
      logS(j+1,1) = logS(j,1) + (mu-0.5*sigma^2)*delta + randn(1,1)*sqrt(delta)*sigma;
   end

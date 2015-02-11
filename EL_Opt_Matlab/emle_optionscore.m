@@ -12,7 +12,7 @@ dl=zeros(nummax,3);
 moneyness=0.99;
 
 % Calculate the Black-Scholes call option price
-%K1=Sn*moneyness;   
+%K1=Sn*moneyness;
 d11=(log(1/moneyness)+(r+0.30^2/2)*delta)/(0.30*sqrt(delta));
 d21=d11-0.30*sqrt(delta);
 optionprice1=normcdf(d11)-moneyness*exp(-r*delta)*normcdf(d21);
