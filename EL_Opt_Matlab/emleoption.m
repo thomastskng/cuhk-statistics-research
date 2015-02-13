@@ -76,6 +76,9 @@ for k=1:noofiter,
            s11(:,:,j)=s11(:,:,j)+[Y1obs(j,n),Y2obs(j,n), Y3obs(j,n)]'*[Y1obs(j,n),Y2obs(j,n), Y3obs(j,n)];
            s12(:,:,j)=s12(:,:,j)+[dY1dmuobs(j,n),dY1dsigmaobs(j,n);dY2dmuobs(j,n),dY2dsigmaobs(j,n);dY3dmuobs(j,n),dY3dsigmaobs(j,n)];
        end
+       %s11(:,:,j) = [Y1obs(j,:);Y2obs(j,:); Y3obs(j,:)] * [Y1obs(j,:);Y2obs(j,:); Y3obs(j,:)]';
+       %s12(:,:,j) = [ones(1,nsims);zeros(1,nsims);zeros(1,nsims)]*[dY1dmuobs(j,:);dY1dsigmaobs(j,:)]' + [zeros(1,nsims);ones(1,nsims);zeros(1,nsims)]*[dY2dmuobs(j,:);dY2dsigmaobs(j,:)]' + [zeros(1,nsims);zeros(1,nsims);ones(1,nsims)]*[dY3dmuobs(j,:);dY3dsigmaobs(j,:)]'
+       
        s11(:,:,j)=-s11(:,:,j)/nsims;
        s12(:,:,j)=s12(:,:,j)/nsims;   
        A=A+s12(:,:,j)'*inv(s11(:,:,j))*s12(:,:,j)/size(t1,2);
@@ -86,6 +89,7 @@ for k=1:noofiter,
             for n=1:nsims
                 gammaobs(:,:,j,l)=gammaobs(:,:,j,l)+[Y1obs(j,n), Y2obs(j,n), Y3obs(j,n)]'*[Y1obs(l,n),Y2obs(l,n),Y3obs(l,n)];
             end
+            %gammaobs(:,:,j,l) = s11(:,:,j)*nsims;
         end
     end
 
