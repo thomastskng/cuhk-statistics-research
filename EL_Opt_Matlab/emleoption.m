@@ -89,7 +89,7 @@ for k=1:noofiter,
             for n=1:nsims
                 gammaobs(:,:,j,l)=gammaobs(:,:,j,l)+[Y1obs(j,n), Y2obs(j,n), Y3obs(j,n)]'*[Y1obs(l,n),Y2obs(l,n),Y3obs(l,n)];
             end
-            %gammaobs(:,:,j,l) = s11(:,:,j)*nsims;
+            %gammaobs(:,:,j,l) = [Y1obs(j,:), Y2obs(j,:), Y3obs(j,:)]*[Y1obs(l,:),Y2obs(l,:),Y3obs(l,:)]';
         end
     end
 
