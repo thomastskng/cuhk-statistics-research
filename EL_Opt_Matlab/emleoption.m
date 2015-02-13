@@ -28,7 +28,8 @@ for k=1:noofiter,
   R=logS(2:nsims+1,1)-logS(1:(nsims),1);
   Sn=exp(logS(nsims+1));   
 
-  init=[mu,0.30];
+  %init=[mu,0.7];
+  init = [0.2,0.6]
   [para, fval, exitflag] = fminunc('emle_option_Lagranian', init, options, nsims, Sn, R);
   
 
@@ -57,7 +58,7 @@ for k=1:noofiter,
   moneyness = 0.99;
   d11=(log(1/moneyness)+(r+0.30^2/2)*delta)/(0.30*sqrt(delta));
   d21=d11-0.30*sqrt(delta);
-  optionprice1=normcdf(d11)-moneyness*exp(-r*delta)*normcdf(d21);
+  optionprice1=(normcdf(d11)-moneyness*exp(-r*delta)*normcdf(d21))/Sn;
 
     for j=1:size(t1,2)
      

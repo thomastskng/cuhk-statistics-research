@@ -15,7 +15,7 @@ moneyness=0.99;
 %K1=Sn*moneyness;
 d11=(log(1/moneyness)+(r+0.30^2/2)*delta)/(0.30*sqrt(delta));
 d21=d11-0.30*sqrt(delta);
-optionprice1=normcdf(d11)-moneyness*exp(-r*delta)*normcdf(d21);
+optionprice1=(normcdf(d11)-moneyness*exp(-r*delta)*normcdf(d21))/Sn;
 
 
 dl(:,1) = cos(t*R)-real(exp(delta*(i*t*(mu-sigma^2/2)-sigma^2*t^2/2)));

@@ -1,4 +1,5 @@
 %Calculate the log-empirical likelihood function
+
 function result=emle_option_Lagranian(para, nsims, Sn, R)
 t1=[-0.50:0.1:-0.01,-0.01:0.1:0.50]*10;
 
