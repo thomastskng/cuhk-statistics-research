@@ -8,7 +8,7 @@ tempsum=0;
 for j = 1:size(t1,2)
     
 %calculate 'g', where g is the cond char function constraint
-   dl = emle_optionscore(para, nsims, t1(j), Sn, R);
+   [dl,eg3] = emle_optionscore(para, nsims, t1(j), Sn, R);
    dl = dl*inv(chol(dl'*dl));
 
 %Find the lagrange multiplier
@@ -27,6 +27,7 @@ for j = 1:size(t1,2)
     
 end
 lambda
+eg3
 result=tempsum/size(t1,2);
-
+end
 

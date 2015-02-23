@@ -1,6 +1,6 @@
 % Calculate dl
 
-function dl=emle_optionscore(para, nsims, t, Sn, R)
+function [dl,eg3]=emle_optionscore(para, nsims, t, Sn, R)
 
 mu=para(1);
 sigma=para(2);
@@ -21,4 +21,5 @@ optionprice1=normcdf(d11)-moneyness*exp(-r*delta)*normcdf(d21);
 dl(:,1) = cos(t*R)-real(exp(delta*(i*t*(mu-sigma^2/2)-sigma^2*t^2/2)));
 dl(:,2) = sin(t*R)-imag(exp(delta*(i*t*(mu-sigma^2/2)-sigma^2*t^2/2)));
 dl(:,3) = (exp(-r*delta)*max(exp(R)-moneyness,0)-optionprice1).*exp(-(r-mu)/(2*sigma^2*delta)*(-2*R*delta+(r+mu)*delta^2-sigma^2*delta^2));
+eg3 = mean(dl(:,3));
 end

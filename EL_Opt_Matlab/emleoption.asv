@@ -32,7 +32,7 @@ for m = 1:size(mm,2),
     R=logS(2:nsims+1,1)-logS(1:(nsims),1);
     Sn=exp(logS(nsims+1));   
 
-    test = exp(R)-mm(m);
+    test = exp(R)-m;
     fail = sum(test<=0) / 1000;
   
     %init=[mu,0.7];
@@ -43,7 +43,7 @@ for m = 1:size(mm,2),
     %init = [0.55,0.80]     % converged
     [para,eg3, fval, exitflag] = fminunc('emle_option_Lagranian', init, options, nsims, Sn, R);
     [dl,eg3_final] = emle_optionscore(para, nsims, 1, Sn, R);
-    checkmat_inner(k,:) = [fail,eg3_final,exitflag];
+    checkmat_inner(k,:) = []
     
     paratotal(k,:)=[para, fval, exitflag];
     
