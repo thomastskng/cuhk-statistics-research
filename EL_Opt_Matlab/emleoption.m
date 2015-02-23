@@ -20,6 +20,7 @@ options = optimset('Display','iter');%,'TolX',1e-4, 'TolFun', 1e-8);
 for k=1:noofiter,
   
     % generate 1001 logS geometric brownian motion samples
+    rng(3)
   for j=1:nsims
      logS(j+1,1) = logS(j,1) + (mu-0.5*sigma^2)*delta + randn(1,1)*sqrt(delta)*sigma;
   end
@@ -28,10 +29,17 @@ for k=1:noofiter,
   R=logS(2:nsims+1,1)-logS(1:(nsims),1);
   Sn=exp(logS(nsims+1));   
 
-  %init=[mu,0.7];
-  init = [0.2,0.6]
-  [para, fval, exitflag] = fminunc('emle_option_Lagranian', init, options, nsims, Sn, R);
+  test = exp(R)-0.99;
+  fail = sum(test<=0) / 1000
   
+  %init=[mu,0.7];
+  %init = [0.1,0.75]     % converged, negative sigma
+  init = [mu,0.3]       % converged, positive sigma, same as above
+  %init = [0.095, 0.2]   % saddlepoint ?
+  %init = [0.5,0.25]     % converged, diff mu, same sigma
+  %init = [0.55,0.80]     % converged
+  [para, fval, exitflag] = fminunc('emle_option_Lagranian', init, options, nsims, Sn, R);
+  exitflag
 
   paratotal(k,:)=[para, fval, exitflag];
   
@@ -58,7 +66,7 @@ for k=1:noofiter,
   moneyness = 0.99;
   d11=(log(1/moneyness)+(r+0.30^2/2)*delta)/(0.30*sqrt(delta));
   d21=d11-0.30*sqrt(delta);
-  optionprice1=(normcdf(d11)-moneyness*exp(-r*delta)*normcdf(d21))/Sn;
+  optionprice1=(normcdf(d11)-moneyness*exp(-r*delta)*normcdf(d21));
 
     for j=1:size(t1,2)
      
