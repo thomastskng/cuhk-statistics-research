@@ -19,7 +19,6 @@ checkmat_outer = zeros(size(mm,2),8);
 
 for m = 1:size(mm,2),
     checkmat_inner = zeros(noofiter,5);
-    rng(1)
     for k=1:noofiter,
         % generate 1001 logS geometric brownian motion samples
         for j=1:nsims
