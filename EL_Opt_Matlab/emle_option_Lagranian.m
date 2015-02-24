@@ -24,7 +24,6 @@ for j = 1:size(t1,2)
     [lambda, fvals, exitflag]=fsolve('emle_option_con', mlambda, options, dl);
        
     tempsum=sum(log(1+ dl*lambda))+tempsum;
-    
 end
 lambda
 eg3

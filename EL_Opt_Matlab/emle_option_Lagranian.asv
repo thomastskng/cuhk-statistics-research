@@ -1,6 +1,6 @@
 %Calculate the log-empirical likelihood function
 
-function [result]=emle_option_Lagranian(para, nsims, Sn, R)
+function result=emle_option_Lagranian(para, nsims, Sn, R)
 t1=[-0.50:0.1:-0.01,-0.01:0.1:0.50]*10;
 
 tempsum=0;
@@ -24,10 +24,12 @@ for j = 1:size(t1,2)
     [lambda, fvals, exitflag]=fsolve('emle_option_con', mlambda, options, dl);
        
     tempsum=sum(log(1+ dl*lambda))+tempsum;
-    
+    if j== 5
+        
+      
 end
-lambda
-eg3
+lambda;
+eg3;
 result=tempsum/size(t1,2);
 end
 
